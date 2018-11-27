@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "Price Spy",
+  "description": "A Chrome extension to track product prices and set email alerts, built with appbase.io.",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "activeTab",
+    "*://*/*"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
+  //  "background": {
+  //    "scripts": [
+  //      "background.js"
+  //    ]
+  //  }
+}
+

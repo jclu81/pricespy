@@ -1,0 +1,8 @@
+#feeds-wrapper li {
+    position: relative;
+    margin-right: 6px;
+    border-bottom: 1px solid #F1F1F1;
+    margin: 0 15px 0 20px;
+    padding: 15px 0;
+    height: 111px;
+}

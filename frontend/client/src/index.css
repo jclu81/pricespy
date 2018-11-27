@@ -1,0 +1,27 @@
+/* base */
+* {
+    margin: 0;
+    padding: 0;
+}
+*:focus {
+    outline: none;
+}
+h2,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+body {
+    background-color: #fff;
+    font: 12px "\5FAE\8F6F\96C5\9ED1";
+    margin: 0;
+    padding: 0;
+    width: 390px;
+}
