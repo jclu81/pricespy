@@ -1,2 +1,0 @@
-# PriceSpy Front End
-
