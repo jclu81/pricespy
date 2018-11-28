@@ -11,7 +11,8 @@
     "activeTab",
     "*://*/*",
     "identity",
-    "notifications"
+    "notifications",
+    "https://*.auth0.com/*"
   ],
   "content_scripts": [
     {
@@ -23,7 +24,7 @@
       ]
     }
   ],
-  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk=' 'https://cdn.auth0.com/*'; object-src 'self'"
   //  "background": {
   //    "scripts": [
   //      "background.js"

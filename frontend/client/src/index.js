@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-import { makeMainRoutes } from './routes';
+import {makeMainRoutes} from './routes';
 // import App from './App/App';
 
 const routes = makeMainRoutes();

@@ -35,8 +35,6 @@ class LoginPage extends React.Component {
                 console.log(err);
                 alert(`Error: ${err.description}. Check the console for further details.`);
                 this.setState({errors: err});
-            } else {
-                this.props.history.push('/callback');
             }
         })
 
