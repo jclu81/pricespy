@@ -13,15 +13,15 @@ class Base extends Component {
     }
 
     goTo(route) {
-        this.props.history.replace(`/${route}`)
+        this.props.history.push(`/${route}`)
     }
 
     login() {
-        this.props.history.replace('/login');
+        this.props.history.push('/login');
     }
 
     signup() {
-        this.props.history.replace('/signup');
+        this.props.history.push('/signup');
     }
 
     logout() {

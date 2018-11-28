@@ -1,0 +1,9 @@
+Flask
+lxml
+pymongo
+requests
+pika
+
+python-dotenv
+authlib
+six

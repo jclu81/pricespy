@@ -9,7 +9,19 @@
   },
   "permissions": [
     "activeTab",
-    "*://*/*"
+    "*://*/*",
+    "identity",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*"
+      ],
+      "js": [
+        "content-script.js"
+      ]
+    }
   ],
   "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
   //  "background": {

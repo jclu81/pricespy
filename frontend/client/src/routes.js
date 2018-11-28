@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, BrowserRouter, Switch} from 'react-router-dom';
+import {Route, Router, Switch} from 'react-router-dom';
 
 
 import App from './App/App';
@@ -10,7 +10,6 @@ import Base from './Base/Base';
 
 import Auth from './Auth/Auth';
 import history from './history';
-// import Callback from './Callback/Callback';
 
 const auth = new Auth();
 
@@ -22,7 +21,7 @@ const handleAuthentication = (nextState, replace) => {
 
 export const makeMainRoutes = () => {
     return (
-        <BrowserRouter>
+        <Router history={history}>
             <Base auth={auth} history={history}>
                 <Switch>
                     <Route exact path="/" render={(props) => <App auth={auth} {...props} />}/>
@@ -36,7 +35,7 @@ export const makeMainRoutes = () => {
                     }/>
                 </Switch>
             </Base>
-        </BrowserRouter>
+        </Router>
     );
 }
 

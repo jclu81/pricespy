@@ -1,0 +1,45 @@
+redis:
+  host: localhost
+  port: 6379
+
+cloudAMQP:
+  dedupe_task_queue_url: amqp://dqrnfwcq:5JShMyJTo_IMnFVJHWIVYccfsjhsQvH7@otter.rmq.cloudamqp.com/dqrnfwcq
+  dedupe_task_queue_name: price-spy-dedupe-task-queue
+  log_clicks_task_queue_url: amqp://tedbgzpi:MWWJvj-q2E8P6yzSzdchBKS3NscmzWzl@donkey.rmq.cloudamqp.com/tedbgzpi
+  log_clicks_task_queue_name: tap-news-log-clicks-task-queue
+
+mongodb:
+  host: localhost
+  port: 27017
+  user: test
+  password: 123456
+  db_name: price-spy
+  offers_table_name: offers
+  click_logs_table_name: click_logs
+  preference_model_table_name: user_preference_model
+
+
+services:
+  recommend_url: http://localhost:5050/
+  modeling_url: http://localhost:6060/
+  host: localhost
+  rpc_port: 4040
+  model_port: 6060
+  recommend_port: 5050
+
+Amazon:
+  search_url : https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords={0}
+  list : //li[contains(@id,"result_")]
+  detail_url : .//a[contains(@class,"s-access-detail-page")]/@href
+  title : .//a[contains(@class,"s-access-detail-page")]/h2/text()
+  price : .//span[@class="a-offscreen"]/text()
+  image : .//div[contains(@class,"s-item-container")]//img/@src
+  detail_price: //*[@id="priceblock_ourprice"]
+
+eBay:
+  search_url : https://www.ebay.com/sch/i.html?_nkw={0}&_sacat=0
+  list : //li[contains(@class,"s-item")]
+  detail_url : .//a[@class="s-item__link"]/@href
+  title : .//h3[contains(@class,"s-item__title")]/text()
+  price : .//span[@class="s-item__price"]/text()
+  image : .//img[@class="s-item__image-img"]/@data-src
