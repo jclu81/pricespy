@@ -64,10 +64,10 @@ const Footer = ({
 );
 
 Footer.propTypes = {
-    login: PropTypes.object.isRequired,
-    signup: PropTypes.object.isRequired,
-    logout: PropTypes.object.isRequired,
-    auth: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired,
+    signup: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
 };
 
 

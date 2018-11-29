@@ -3,8 +3,6 @@ import React, {Component} from 'react';
 import './Base.css';
 
 import Footer from '../Footer/Footer'
-import LoginPage from '../Login/LoginPage';
-import Login from '../Login/Login';
 import SignUpPage from '../SignUp/SignUpPage';
 import ItemCard from "../ItemCard/ItemCard";
 
@@ -20,12 +18,10 @@ class Base extends Component {
     }
 
     login() {
-        this.setState({page: 'login'})
+        // this.setState({page: 'login'})
+        this.props.auth.login();
     }
 
-    // signup() {
-    //     this.setState({page: 'signup'})
-    // }
 
     logout() {
         this.props.auth.logout();
@@ -57,10 +53,10 @@ class Base extends Component {
     renderContent() {
         switch (this.state.page) {
             case 'login':
-                // return <Login></Login>
+            // return <Login></Login>
             case 'signup':
-                return <SignUpPage></SignUpPage>
-            case '':
+                return <SignUpPage/>
+            default:
                 return this.renderContainer()
         }
     }
@@ -69,7 +65,7 @@ class Base extends Component {
         return (
             <div>
                 <header>
-                    <h2 className="logo"></h2>
+                    <h2 className="logo"/>
                     <div id="search">
                         <input type="text" id="product_name" className="text" placeholder="Search for..."
                                onChange={this.searchTextChange.bind(this)}/>
@@ -81,8 +77,8 @@ class Base extends Component {
 
                 {this.renderContent()}
 
-                <Footer login={this.goto.bind(this, 'login')} signup={this.goto.bind(this, 'signup')}
-                        logout={this.logout.bind(this)} auth={this.props.auth}></Footer>
+                <Footer login={this.login.bind(this)} signup={this.goto.bind(this, 'signup')}
+                        logout={this.logout.bind(this)} auth={this.props.auth}/>
             </div>
 
         );

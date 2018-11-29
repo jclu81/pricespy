@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import SignUpForm from './SignUpForm';
 
@@ -84,9 +83,5 @@ class SignUpPage extends React.Component {
 
 }
 
-// To make react-router work
-SignUpPage.contextTypes = {
-    router: PropTypes.object.isRequired
-};
 
 export default SignUpPage;
