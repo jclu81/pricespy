@@ -25,15 +25,16 @@ export const makeMainRoutes = () => {
             <Base auth={auth} history={history}>
 
                 <Switch>
+
+                    <Route exact path="/" render={(props) => <App auth={auth} {...props} />}/>
+                    <Route exact path="/search/:keywords" render={(props) => <App auth={auth} {...props} />}/>
+                    <Route path="/login" render={(props) => <LoginPage auth={auth} {...props} />}/>
+                    <Route path="/signup" render={(props) => <SignUpPage auth={auth} {...props} />}/>
                     <Route path="/callback" render={(props) => {
                         handleAuthentication(props);
                         return <App auth={auth} {...props} />
                     }
                     }/>
-                    <Route exact path="/" render={(props) => <App auth={auth} {...props} />}/>
-                    <Route exact path="/search/:keywords" render={(props) => <App auth={auth} {...props} />}/>
-                    <Route path="/login" render={(props) => <LoginPage auth={auth} {...props} />}/>
-                    <Route path="/signup" render={(props) => <SignUpPage auth={auth} {...props} />}/>
 
 
                 </Switch>

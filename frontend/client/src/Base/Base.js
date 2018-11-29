@@ -1,122 +1,124 @@
 import React, {Component} from 'react';
-import {Navbar, Button} from 'react-bootstrap';
 
 import './Base.css';
 
+import Footer from '../Footer/Footer'
+import LoginPage from '../Login/LoginPage';
+import Login from '../Login/Login';
+import SignUpPage from '../SignUp/SignUpPage';
+import ItemCard from "../ItemCard/ItemCard";
 
 class Base extends Component {
     constructor() {
         super();
         this.state = {
-            searchText: ""
+            page: "",
+            searchText: "",
+            items: null
         };
-    }
-
-    goTo(route) {
-        this.props.history.push(`/${route}`)
+        this.searchTextSubmit()
     }
 
     login() {
-        this.props.history.push('/login');
+        this.setState({page: 'login'})
     }
 
-    signup() {
-        this.props.history.push('/signup');
-    }
+    // signup() {
+    //     this.setState({page: 'signup'})
+    // }
 
     logout() {
         this.props.auth.logout();
     }
 
+    goto(pageName) {
+        this.setState({page: pageName})
+    }
 
     searchTextChange(event) {
-        console.log(this.state);
         this.setState({searchText: event.target.value});
     }
 
-    searchItem(event) {
-        this.props.history.replace('/search/:' + this.state.searchText);
+    searchTextSubmit() {
+        const root = "https://pricespy-297.herokuapp.com/product/";
+        let searchText = this.state.searchText;
+        searchText = searchText || "hot";
+        let url = root + searchText;
+
+        console.log(url);
+        fetch(url)
+            .then((response) => {
+                return response.json();
+            }).then((data) => {
+            this.setState({items: data, page: ''});
+        })
+    }
+
+    renderContent() {
+        switch (this.state.page) {
+            case 'login':
+                // return <Login></Login>
+            case 'signup':
+                return <SignUpPage></SignUpPage>
+            case '':
+                return this.renderContainer()
+        }
     }
 
     render() {
-        const {isAuthenticated} = this.props.auth;
-
         return (
             <div>
                 <header>
-                    <a href="" target="_blank">
-                        <h2 className="logo"></h2>
-                    </a>
+                    <h2 className="logo"></h2>
                     <div id="search">
                         <input type="text" id="product_name" className="text" placeholder="Search for..."
                                onChange={this.searchTextChange.bind(this)}/>
 
                         <button className="search-btn" type="button" value="" hidefocus="true"
-                                onClick={this.searchItem.bind(this)}/>
+                                onClick={this.searchTextSubmit.bind(this)}/>
                     </div>
                 </header>
 
+                {this.renderContent()}
 
-                {this.props.children}
-
-
-                <div className={'footer'}>
-                    <Navbar fluid>
-                        <Navbar.Header>
-                            <Navbar.Brand>
-                                <a href="#">Welcome!</a>
-                            </Navbar.Brand>
-                            <Button
-                                bsStyle="primary"
-                                className="btn-margin"
-                                onClick={this.goTo.bind(this, 'home')}
-                            >
-                                Home
-                            </Button>
-                            {
-                                !isAuthenticated() && (
-                                    <Button
-                                        bsStyle="primary"
-                                        className="btn-margin"
-                                        onClick={this.login.bind(this)}
-                                    >
-                                        Log In
-                                    </Button>
-
-                                )
-                            }
-                            {
-                                !isAuthenticated() && (
-                                    <Button
-                                        bsStyle="primary"
-                                        className="btn-margin"
-                                        onClick={this.signup.bind(this)}
-                                    >
-                                        Sign Up
-                                    </Button>
-
-                                )
-                            }
-                            {
-                                isAuthenticated() && (
-                                    <Button
-                                        bsStyle="primary"
-                                        className="btn-margin"
-                                        onClick={this.logout.bind(this)}
-                                    >
-                                        Log Out
-                                    </Button>
-                                )
-                            }
-                        </Navbar.Header>
-                    </Navbar>
-                </div>
+                <Footer login={this.goto.bind(this, 'login')} signup={this.goto.bind(this, 'signup')}
+                        logout={this.logout.bind(this)} auth={this.props.auth}></Footer>
             </div>
 
         );
     }
 
+    renderContainer() {
+        if (this.state.items) {
+            return (
+                <div id="feeds-wrapper">
+                    {this.renderItems()}
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <div id='msg-app-loading'>
+                        Loading...
+                    </div>
+                </div>
+            );
+        }
+    }
 
+    renderItems() {
+        let itemsList = this.state.items.map(function (item) {
+            return (
+                <ItemCard item={item}/>
+            );
+        });
+
+        return (
+            <ul id="products">
+                {itemsList}
+            </ul>
+        );
+    }
 }
 
 export default Base;

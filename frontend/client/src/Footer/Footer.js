@@ -1,26 +1,76 @@
-import React, {Component} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import './Footer.css';
 
-import { Navbar } from 'react-bootstrap';
-class Footer extends Component {
-    render() {
-        return (
-            <Navbar>
-                <Navbar.Header>
-                    <Navbar.Brand>
-                        <a href="#home">Brand</a>
-                    </Navbar.Brand>
-                    <Navbar.Toggle />
-                </Navbar.Header>
-                <Navbar.Collapse>
-                    <Navbar.Text>
-                        Signed in as: <Navbar.Link href="#">Mark Otto</Navbar.Link>
-                    </Navbar.Text>
-                    <Navbar.Text pullRight>Have a great day!</Navbar.Text>
-                </Navbar.Collapse>
-            </Navbar>
-        );
-    }
-}
+import {Button, Navbar} from 'react-bootstrap';
+
+
+const Footer = ({
+                    login,
+                    signup,
+                    logout,
+                    auth,
+                }) => (
+    <div className={'footer'}>
+        <Navbar fluid>
+            <Navbar.Header>
+                <Navbar.Brand>
+                    Welcome!
+                </Navbar.Brand>
+                <Button
+                    bsStyle="primary"
+                    className="btn-margin"
+                >
+                    Home
+                </Button>
+                {
+                    !auth.isAuthenticated() && (
+                        <Button
+                            bsStyle="primary"
+                            className="btn-margin"
+                            onClick={login}
+                        >
+                            Log In
+                        </Button>
+
+                    )
+                }
+                {
+                    !auth.isAuthenticated() && (
+                        <Button
+                            bsStyle="primary"
+                            className="btn-margin"
+                            onClick={signup}
+                        >
+                            Sign Up
+                        </Button>
+
+                    )
+                }
+                {
+                    auth.isAuthenticated() && (
+                        <Button
+                            bsStyle="primary"
+                            className="btn-margin"
+                            onClick={logout}
+                        >
+                            Log Out
+                        </Button>
+                    )
+                }
+            </Navbar.Header>
+        </Navbar>
+    </div>
+);
+
+Footer.propTypes = {
+    login: PropTypes.object.isRequired,
+    signup: PropTypes.object.isRequired,
+    logout: PropTypes.object.isRequired,
+    auth: PropTypes.func.isRequired
+};
+
 
 export default Footer;
+
+

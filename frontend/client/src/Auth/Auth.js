@@ -29,7 +29,7 @@ export default class Auth {
             // scope: 'openid',
             // device: 'chrome-extension',
             auth: {
-                redirectUrl: AUTH_CONFIG.redirectUrl,
+                redirectUrl: AUTH_CONFIG.callbackUrl,
                 responseType: 'token id_token',
             },
             configurationBaseUrl: 'https://cdn.auth0.com',
