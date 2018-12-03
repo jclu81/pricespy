@@ -1,0 +1,13 @@
+.footer {
+    background-color: #fff;
+    border-top: 1px solid #dfdfdf;
+    height: 27px;
+    padding: 5px;
+    line-height: 30px;
+}
+
+.footer .btn-link {
+    border-right: 1px solid #D4D4D4;
+    width: 20%;
+    float: right;
+}

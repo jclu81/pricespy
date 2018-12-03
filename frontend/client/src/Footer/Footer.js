@@ -1,75 +1,54 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+
 import './Footer.css';
 
-import {Button, Navbar} from 'react-bootstrap';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import Home from '@material-ui/icons/Home';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Notifications from '@material-ui/icons/Notifications';
 
+class Footer extends Component {
+    constructor() {
+        super();
+        this.state = {
+            value: "home",
+        };
+        this.handleChange = this.handleChange.bind(this);
+    }
 
-const Footer = ({
-                    login,
-                    signup,
-                    logout,
-                    auth,
-                }) => (
-    <div className={'footer'}>
-        <Navbar fluid>
-            <Navbar.Header>
-                <Navbar.Brand>
-                    Welcome!
-                </Navbar.Brand>
-                <Button
-                    bsStyle="primary"
-                    className="btn-margin"
-                >
-                    Home
-                </Button>
-                {
-                    !auth.isAuthenticated() && (
-                        <Button
-                            bsStyle="primary"
-                            className="btn-margin"
-                            onClick={login}
-                        >
-                            Log In
-                        </Button>
+    handleChange = (event, value) => {
+        this.setState({value});
+        switch (value) {
+            case "home":
+                this.props.goto(value);
+                break;
+            default:
+        }
+    };
 
-                    )
-                }
-                {
-                    !auth.isAuthenticated() && (
-                        <Button
-                            bsStyle="primary"
-                            className="btn-margin"
-                            onClick={signup}
-                        >
-                            Sign Up
-                        </Button>
+    render() {
+        const {value} = this.state;
+        return (
+            <BottomNavigation
+                value={value}
+                onChange={this.handleChange}
+                showLabels
+                className="footer-nav"
+            >
+                <BottomNavigationAction value="home" label="Home" icon={<Home/>}/>
+                <BottomNavigationAction value="profile" label="Profile" icon={<AccountCircle/>}/>
+                <BottomNavigationAction value="notifications" label="Notifications" icon={<Notifications/>}/>
+            </BottomNavigation>
+        )
+    }
+}
 
-                    )
-                }
-                {
-                    auth.isAuthenticated() && (
-                        <Button
-                            bsStyle="primary"
-                            className="btn-margin"
-                            onClick={logout}
-                        >
-                            Log Out
-                        </Button>
-                    )
-                }
-            </Navbar.Header>
-        </Navbar>
-    </div>
-);
 
 Footer.propTypes = {
-    login: PropTypes.func.isRequired,
-    signup: PropTypes.func.isRequired,
-    logout: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    goto: PropTypes.func.isRequired
 };
-
 
 export default Footer;
 

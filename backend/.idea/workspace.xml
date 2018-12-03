@@ -2,15 +2,55 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03a5abba-988a-4ebe-9b6b-c4be0cffc5fc" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/client/src/Favorite/Favorite.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/client/src/Favorite/Favorite.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/client/src/Filter/FilterBar.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/client/src/Filter/FilterBar.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/client/src/Header/Header.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/client/src/Header/Header.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/client/src/SaveFavorite/persistentCart.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/server/.idea/jsLibraryMappings.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/server/.idea/vcs.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/server/config/config.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/server/middleware/auth_checker.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/server/models/main.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/server/models/user.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/server/passport/login_passport.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/server/passport/signup_passport.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/server/routes/auth.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/server/routes/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/server/routes/news.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/server/rpc-client/rpc_client.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/server/rpc-client/rpc_client_test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/server/views/error.jade" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/server/views/index.jade" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../frontend/server/views/layout.jade" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/server.py" afterPath="$PROJECT_DIR$/server.py" />
       <change beforePath="$PROJECT_DIR$/../frontend/client/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../frontend/client/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/../frontend/client/src/App/App.js" afterPath="$PROJECT_DIR$/../frontend/client/src/App/App.js" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/package-lock.json" afterPath="$PROJECT_DIR$/../frontend/client/package-lock.json" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/package.json" afterPath="$PROJECT_DIR$/../frontend/client/package.json" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/public/index.html" afterPath="$PROJECT_DIR$/../frontend/client/public/index.html" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/public/manifest.json" afterPath="$PROJECT_DIR$/../frontend/client/public/manifest.json" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/src/App/App.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/src/App/App.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/src/App/App.test.js" afterPath="" />
       <change beforePath="$PROJECT_DIR$/../frontend/client/src/Auth/Auth.js" afterPath="$PROJECT_DIR$/../frontend/client/src/Auth/Auth.js" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/src/Base/Base.css" afterPath="$PROJECT_DIR$/../frontend/client/src/Base/Base.css" />
       <change beforePath="$PROJECT_DIR$/../frontend/client/src/Base/Base.js" afterPath="$PROJECT_DIR$/../frontend/client/src/Base/Base.js" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/src/Callback/Callback.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/src/Callback/loading.svg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/src/Footer/Footer.css" afterPath="$PROJECT_DIR$/../frontend/client/src/Footer/Footer.css" />
       <change beforePath="$PROJECT_DIR$/../frontend/client/src/Footer/Footer.js" afterPath="$PROJECT_DIR$/../frontend/client/src/Footer/Footer.js" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/src/ItemCard/ItemCard.css" afterPath="$PROJECT_DIR$/../frontend/client/src/ItemCard/ItemCard.css" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/src/ItemCard/ItemCard.js" afterPath="$PROJECT_DIR$/../frontend/client/src/ItemCard/ItemCard.js" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/src/Login/LoginForm.css" afterPath="$PROJECT_DIR$/../frontend/client/src/Login/LoginForm.css" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/src/Login/LoginForm.js" afterPath="$PROJECT_DIR$/../frontend/client/src/Login/LoginForm.js" />
       <change beforePath="$PROJECT_DIR$/../frontend/client/src/Login/LoginPage.js" afterPath="$PROJECT_DIR$/../frontend/client/src/Login/LoginPage.js" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/src/SignUp/SignUpForm.js" afterPath="$PROJECT_DIR$/../frontend/client/src/SignUp/SignUpForm.js" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/src/SignUp/SignUpPage.js" afterPath="$PROJECT_DIR$/../frontend/client/src/SignUp/SignUpPage.js" />
+      <change beforePath="$PROJECT_DIR$/../frontend/client/src/history.js" afterPath="" />
       <change beforePath="$PROJECT_DIR$/../frontend/client/src/index.js" afterPath="$PROJECT_DIR$/../frontend/client/src/index.js" />
-      <change beforePath="$PROJECT_DIR$/../frontend/client/src/routes.js" afterPath="$PROJECT_DIR$/../frontend/client/src/routes.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -51,11 +91,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="server.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="41">
-              <caret line="14" column="52" lean-forward="true" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
+            <state relative-caret-position="109">
+              <caret line="14" column="52" lean-forward="false" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -95,10 +135,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="crawler.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="crawler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/crawlers/crawler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
+            <state relative-caret-position="958">
               <caret line="90" column="25" lean-forward="false" selection-start-line="90" selection-start-column="15" selection-end-line="90" selection-end-column="25" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
@@ -142,9 +182,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="116" />
-    <option name="y" value="128" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="493" />
+    <option name="y" value="72" />
     <option name="width" value="890" />
     <option name="height" value="772" />
   </component>
@@ -253,7 +293,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="116" y="128" width="890" height="772" extended-state="0" />
+    <frame x="493" y="72" width="890" height="772" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2494382" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -561,16 +601,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="14" column="52" lean-forward="true" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -607,10 +637,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/crawlers/crawler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="958">
           <caret line="90" column="25" lean-forward="false" selection-start-line="90" selection-start-column="15" selection-end-line="90" selection-end-column="25" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="14" column="52" lean-forward="false" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
           </folding>
         </state>
       </provider>

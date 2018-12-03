@@ -8,30 +8,31 @@ const LoginForm = ({
                        errors,
                        users,
                    }) => (
-    <div className="container">
-        <div className="card-panel login-panel">
-            <form className="col s12" action="/" onSubmit={onSubmit}>
-                <h4 className="center-align">Login</h4>
-                {errors.summary && <div className="row"><p className="error-message">{errors.summary}</p></div>}
-                <div className="row">
-                    <div className="input-field col s12">
-                        <input className="validate" id="email" type="email" name="email" onChange={onChange}/>
-                        <label htmlFor='email'>Email</label>
-                    </div>
+    <div className="cloud-box login-box">
+        <form className="form-horizontal" action="/" onSubmit={onSubmit}>
+            <h4 className="title">Login</h4>
+            {errors.summary && <div className="row"><p className="error-message">{errors.summary}</p></div>}
+
+            <div className="form-group">
+                <div className="col-sm-12">
+                    <input className="form-control" id="email" type="email" name="email" placeholder="E-mail"
+                           onChange={onChange}/>
                 </div>
-                {errors.email && <div className="row"><p className="error-message">{errors.email}</p></div>}
-                <div className="row">
-                    <div className="input-field col s12">
-                        <input className="validate" id="password" type="password" name="password" onChange={onChange}/>
-                        <label htmlFor='password'>Password</label>
-                    </div>
+            </div>
+            {errors.email && <div className="row"><p className="error-message">{errors.email}</p></div>}
+            <div className="form-group">
+                <div className="col-sm-12">
+                    <input className="form-control" id="password" type="password" name="password" placeholder="Password"
+                           onChange={onChange}/>
                 </div>
-                {errors.password && <div className="row"><p className="error-message">{errors.password}</p></div>}
-                <div className="row right-align">
-                    <input type="submit" className="waves-effect waves-light btn indigo lighten-1" value='Log in'/>
+            </div>
+            {errors.password && <div className="row"><p className="error-message">{errors.password}</p></div>}
+            <div className="form-group">
+                <div className="col-sm-12">
+                    <input type="submit" className="btn btn-medium btn-block btn-primary" value='Log in'/>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 );
 

@@ -7,12 +7,8 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 import Base from './Base/Base';
-import Auth from './Auth/Auth';
 
-const auth = new Auth();
-
-
-ReactDOM.render(<Base auth={auth}/>, document.getElementById('root'));
+ReactDOM.render(<Base/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -1,0 +1,36 @@
+redis:
+  host: localhost
+  port: 6379
+
+cloudAMQP:
+  dedupe_news_task_queue_url: amqp://byonkgbn:Qr3TstZuiq-STWZ69MudAEc71lmtDahe@donkey.rmq.cloudamqp.com/byonkgbn
+  dedupe_news_task_queue_name: tap-news-dedupe-news-task-queue
+  log_clicks_task_queue_url: amqp://tedbgzpi:MWWJvj-q2E8P6yzSzdchBKS3NscmzWzl@donkey.rmq.cloudamqp.com/tedbgzpi
+  log_clicks_task_queue_name: tap-news-log-clicks-task-queue
+  scrape_news_task_queue_url: amqp://kgsmfjzm:aGA2MLHBqHWhZ9Nk8ofWaMewkUIlEHNc@llama.rmq.cloudamqp.com/kgsmfjzm
+  scrape_news_task_queue_name: tap-news-scrape-news-task-queue
+
+mongodb:
+  host: localhost
+  port: 27017
+  db_name: tap-news
+  news_table_name: news
+  click_logs_table_name: click_logs
+  preference_model_table_name: user_preference_model
+
+services:
+  recommend_url: http://localhost:5050/
+  modeling_url: http://localhost:6060/
+  host: localhost
+  rpc_port: 4040
+  model_port: 6060
+  recommend_port: 5050
+
+news_api:
+  news_api_endpoint: http://newsapi.org/v1/
+  news_api_key: e19073722a2c4b1a98d685c61f53073d
+  articles_api: articles
+
+graphite_carbon:
+  carbon_server: localhost
+  carbon_port: 2003

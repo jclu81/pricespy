@@ -37,15 +37,37 @@ class SignUpPage extends React.Component {
             return;
         }
 
-        this.props.auth.signup(email, password, err => {
-            if (err) {
-                console.log(err);
-                alert(`Error: ${err.description}. Check the console for further details.`);
-                this.setState({errors: err});
+        // Post registeration data
+        fetch('http://localhost:3000/auth/signup', {
+            method: 'POST',
+            cache: false,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: this.state.user.email,
+                password: this.state.user.password
+            })
+        }).then(response => {
+            if (response.status === 200) {
+                this.setState({
+                    errors: {}
+                });
+
+                // change the current URL to /login
+                this.context.router.replace('/login');
+
             } else {
-                this.props.history.replace('/Login');
+                response.json().then(function (json) {
+                    console.log(json);
+                    const errors = json.errors ? json.errors : {};
+                    errors.summary = json.message;
+                    console.log(this.state.errors);
+                    this.setState({errors});
+                }.bind(this));
             }
-        })
+        });
 
 
     }

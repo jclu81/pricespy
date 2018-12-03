@@ -1,6 +1,7 @@
 import React from 'react';
-
+import Auth from '../Auth/Auth';
 import LoginForm from './LoginForm';
+
 
 class LoginPage extends React.Component {
 
@@ -29,13 +30,41 @@ class LoginPage extends React.Component {
         console.log("email", email);
         console.log("password", password);
 
-        this.props.auth.login(email, password, err => {
-            if (err) {
-                console.log(err);
-                alert(`Error: ${err.description}. Check the console for further details.`);
-                this.setState({errors: err});
-            }
-        })
+        //POST LOGIN DATA
+        //build a request variable
+        let request = new Request('http://localhost:3000/api/v1/login', {
+            method: 'POST',
+            cache: false,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: this.state.user.email,
+                password: this.state.user.password,
+            })
+        });
+
+        fetch(request)
+            .then(response => {
+                if (response.status === 200) {
+                    this.setState({
+                        errors: {}
+                    });
+                    response.json().then(function (json) {
+                        console.log(json);
+                        Auth.authenticateUser(json.token, email);
+                        this.context.router.replace('/');
+                    }.bind(this));
+                } else {
+                    console.log("Login Failed!");
+                    response.json().then(function (json) {
+                        const errors = json.errors ? json.errors : {};
+                        errors.summary = json.message;
+                        this.setState({errors});
+                    }.bind(this));
+                }
+            });
 
     }
 

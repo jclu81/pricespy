@@ -1,8 +1,94 @@
-#feeds-wrapper li {
-    position: relative;
-    margin-right: 6px;
-    border-bottom: 1px solid #F1F1F1;
-    margin: 0 15px 0 20px;
-    padding: 15px 0;
-    height: 111px;
+.content-wrapper .content-buy {
+    position: absolute;
+    top: -6px;
+    right: 8px;
+    width: 60px;
+    height: 24px;
+    color: #fff;
+    line-height: 24px;
+    text-align: center;
+    background-color: #FF5A27;
+    border-radius: 50px;
+}
+
+.content-wrapper .content-title {
+    display: block;
+    overflow: hidden;
+    font-size: 12px;
+    color: #444;
+    line-height: 16px;
+    max-height: 32px;
+    margin-bottom: 7px;
+    overflow: hidden;
+}
+
+.content-wrapper .content-title:hover {
+    color: #FF5A27;
+}
+
+.content-wrapper .content-dollar {
+    color: #FF354E;
+    margin-bottom: 10px;
+}
+
+.content-wrapper .content-detail {
+    color: #fa8200;
+    overflow: hidden;
+    line-height: 13px;
+    max-height: 44px;
+}
+
+.content-wrapper .content-from {
+    position: absolute;
+    top: 80px;
+    width: 252px;
+    color: #9E9E9E;
+}
+
+.content-wrapper .content-from-site {
+    display: inline-block;
+    color: #999;
+    max-width: 125px;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.content-wrapper .content-from-site:after {
+    content: '';
+    margin-left: 6px;
+}
+
+.content-from-time {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.content-wrapper .content-buy {
+    position: absolute;
+    top: -6px;
+    right: 35px;
+    width: 60px;
+    height: 24px;
+    color: #fff;
+    line-height: 24px;
+    text-align: center;
+    background-color: #FF5A27;
+    border-radius: 50px;
+}
+
+.content-wrapper .shopping-car {
+
+}
+
+.content-wrapper .content-ctn {
+    height: 57px;
+    overflow: hidden;
+}
+
+.content-from .btn {
+    float: right;
+    padding: 4px 4px;
+    width: 80px;
 }

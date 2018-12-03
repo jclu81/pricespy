@@ -22,6 +22,7 @@ def query(product_name):
 
 @app.route('/api/v1/login', methods=['POST'])
 def login(product_name):
+
     data = json.dumps(crawlByKeywords(product_name))
     resp = Response(data, status=200, mimetype='application/json')
     resp.headers['Access-Control-Allow-Origin'] = '*'
