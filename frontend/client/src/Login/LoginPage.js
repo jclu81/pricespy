@@ -1,6 +1,7 @@
 import React from 'react';
 import Auth from '../Auth/Auth';
 import LoginForm from './LoginForm';
+import PropTypes from "prop-types";
 
 
 class LoginPage extends React.Component {
@@ -32,9 +33,8 @@ class LoginPage extends React.Component {
 
         //POST LOGIN DATA
         //build a request variable
-        let request = new Request('http://localhost:3000/api/v1/login', {
+        let request = new Request('https://secure-spire-97017.herokuapp.com/auth/login', {
             method: 'POST',
-            cache: false,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -54,8 +54,8 @@ class LoginPage extends React.Component {
                     response.json().then(function (json) {
                         console.log(json);
                         Auth.authenticateUser(json.token, email);
-                        this.context.router.replace('/');
-                    }.bind(this));
+                    });
+                    this.props.goto("home")
                 } else {
                     console.log("Login Failed!");
                     response.json().then(function (json) {
@@ -89,5 +89,8 @@ class LoginPage extends React.Component {
     }
 }
 
+LoginPage.propTypes = {
+    goto: PropTypes.func.isRequired,
+};
 
 export default LoginPage;

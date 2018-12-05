@@ -12,9 +12,6 @@ import Notifications from '@material-ui/icons/Notifications';
 class Footer extends Component {
     constructor() {
         super();
-        this.state = {
-            value: "home",
-        };
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -29,7 +26,7 @@ class Footer extends Component {
     };
 
     render() {
-        const {value} = this.state;
+        const value = this.props.page;
         return (
             <BottomNavigation
                 value={value}
@@ -47,6 +44,7 @@ class Footer extends Component {
 
 
 Footer.propTypes = {
+    page: PropTypes.string.isRequired,
     goto: PropTypes.func.isRequired
 };
 

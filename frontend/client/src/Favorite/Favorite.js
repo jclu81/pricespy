@@ -12,7 +12,7 @@ class Favorite extends Component {
     renderContainer() {
         const items = this.props.savedItems;
 
-        if (items && items.length !== 0) {
+        if (items && items.size !== 0) {
             return (
                 <div id="feeds-wrapper">
                     {this.renderItems(items)}
@@ -30,18 +30,15 @@ class Favorite extends Component {
     }
 
     renderItems(items) {
+        console.log(items)
         const saveItem = this.props.saveItem;
         const removeItem = this.props.removeItem;
 
         let itemsList = [];
-        Object.keys(items).forEach(function (key, idx) {
-            console.log(key);
-            console.log(items[key]);
-            itemsList.push(<ItemCard item={items[key]} key={key} index={key} isSaved={true}
-                                       saveItem={saveItem} removeItem={removeItem}/>);
-            console.log(itemsList);
+        items.forEach(function (value, key, map) {
+            itemsList.push(<ItemCard item={value} key={key} index={key} isSaved={true}
+                                     saveItem={saveItem} removeItem={removeItem}/>);
         });
-        console.log(itemsList);
 
         return (
             <ul id="products">

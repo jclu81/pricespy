@@ -1,6 +1,8 @@
 import React from 'react';
 
 import SignUpForm from './SignUpForm';
+import PropTypes from "prop-types";
+import LoginPage from "../Login/LoginPage";
 
 class SignUpPage extends React.Component {
     //context is needed for react-router
@@ -38,9 +40,8 @@ class SignUpPage extends React.Component {
         }
 
         // Post registeration data
-        fetch('http://localhost:3000/auth/signup', {
+        fetch('https://secure-spire-97017.herokuapp.com/auth/signup', {
             method: 'POST',
-            cache: false,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -56,7 +57,7 @@ class SignUpPage extends React.Component {
                 });
 
                 // change the current URL to /login
-                this.context.router.replace('/login');
+                this.props.goto("login")
 
             } else {
                 response.json().then(function (json) {
@@ -105,5 +106,8 @@ class SignUpPage extends React.Component {
 
 }
 
+SignUpPage.propTypes = {
+    goto: PropTypes.func.isRequired,
+};
 
 export default SignUpPage;

@@ -14,17 +14,20 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Search from '@material-ui/icons/Search';
 import Tune from "@material-ui/icons/Tune"
 import IconButton from '@material-ui/core/IconButton';
-import Collapse from '@material-ui/core/Collapse';
+import Grid from '@material-ui/core/Grid';
 
 import persistentCart from "../SaveFavorite/persistentCart"
+import Auth from "../Auth/Auth"
 import Favorite from "../Favorite/Favorite";
 import Footer from "../Footer/Footer";
-import FilterBar from "../Filter/FilterBar";
+import SortBar from "../Sort/SortBar";
+import FilterPanel from "../Filter/FilterPanel";
+
 
 class Base extends Component {
     constructor() {
         super();
-        this.loadSavedItems = this.loadSavedItems.bind(this);
+
         this.saveItem = this.saveItem.bind(this);
         this.getItem = this.getItem.bind(this);
         this.removeItem = this.removeItem.bind(this);
@@ -46,53 +49,56 @@ class Base extends Component {
         this.handleFilterClick = this.handleFilterClick.bind(this);
 
         this.state = {
-            page: "",
+            page: "home",
             searchText: "",
             suggestions: [],
             items: null,
-            savedItems: {},
+            filteredItems: null,
+            savedItems: this.loadSavedItems(),
             showFilter: false
         }
         ;
-        this.loadSavedItems();
+
         this.searchTextSubmit();
 
     }
 
-    loadSavedItems() {
-        this.setState({savedItems: persistentCart().get() || {}});
-    }
+    updateFilterItems = (data) => {
+        this.setState({filteredItems: data});
+    };
+
+    loadSavedItems = () => {
+        return new Map(persistentCart().get());
+    };
 
     saveItem(key, item) {
         let savedItems = this.state.savedItems;
-        savedItems[key] = item;
+        savedItems.set(key, item);
         persistentCart().persist(savedItems);
         this.setState({savedItems: savedItems});
-        console.log(savedItems);
     }
 
     getItem(key) {
         let savedItems = this.state.savedItems;
-        return savedItems ? savedItems[key] : null;
+        return savedItems ? savedItems.get(key) : null;
     }
 
     removeItem(key) {
         let savedItems = this.state.savedItems;
-        delete savedItems[key];
+        savedItems.delete(key);
         persistentCart().persist(savedItems);
         this.setState({savedItems: savedItems});
-        console.log(savedItems);
     }
 
     logout() {
-        this.props.auth.logout();
+        Auth.deauthenticate();
     }
 
     goto(pageName) {
         this.setState({page: pageName})
     }
 
-    searchTextChange(event, {newValue, method}) {
+    searchTextChange = (event, {newValue, method}) => {
         this.setState({searchText: newValue});
     };
 
@@ -167,6 +173,7 @@ class Base extends Component {
                         </IconButton>
                     </InputAdornment>
                 }
+                innerRef={inputProps.ref}
                 {...inputProps}
             />
         );
@@ -175,9 +182,9 @@ class Base extends Component {
     getSuggestionValue = suggestion => suggestion.text;
 
     searchTextSubmit() {
-        const root = "https://pricespy-297.herokuapp.com/product/";
+        const root = "https://pricespy-server.herokuapp.com/product/";
         let searchText = this.state.searchText;
-        searchText = searchText || "hot";
+        searchText = searchText || "new";
         let url = root + searchText;
 
         console.log(url);
@@ -185,19 +192,20 @@ class Base extends Component {
             .then((response) => {
                 return response.json();
             }).then((data) => {
-            this.setState({items: data, page: ''});
+            this.setState({items: data, filteredItems: data, page: 'home'});
         })
     }
 
     renderContent() {
         switch (this.state.page) {
             case 'login':
-                return <LoginPage auth={this.props.auth}/>;
+                return <LoginPage goto={this.goto}/>;
             case 'signup':
-                return <SignUpPage/>;
+                return <SignUpPage goto={this.goto}/>;
             case 'favorite':
                 return <Favorite savedItems={this.state.savedItems}
                                  saveItem={this.saveItem} removeItem={this.removeItem}/>;
+            case 'home':
             default:
                 return (
                     <div id="feeds-wrapper">
@@ -218,28 +226,34 @@ class Base extends Component {
 
     handleFilterClick = () => {
         this.setState({showFilter: !this.state.showFilter});
-        console.log(this.state.showFilter)
     };
+
+    closeFilterPanel = () => {
+        this.setState({showFilter: false});
+    };
+
 
     renderItems() {
         const saveItem = this.saveItem;
         const removeItem = this.removeItem;
         const getItem = this.getItem;
 
-        let itemsList = this.state.items.map(function (item, index) {
+        let itemsList = this.state.filteredItems.map(function (item, index) {
             const isSaved = getItem(index);
             return (
-                <ItemCard item={item} key={index} index={index} isSaved={isSaved}
+                <ItemCard item={item} key={item["product_id"]} index={index} isSaved={isSaved}
                           saveItem={saveItem} removeItem={removeItem}/>
             );
         });
 
-        const showFilter = this.state.showFilter;
+
         return (
             [
-                <Collapse in={showFilter}>
-                    <FilterBar/>
-                </Collapse>,
+                <FilterPanel items={this.state.items} showFilter={this.state.showFilter}
+                             updateFilterItems={this.updateFilterItems}
+                             closeFilterPanel={this.closeFilterPanel}/>,
+                <SortBar items={this.state.filteredItems} updateFilterItems={this.updateFilterItems}/>
+                ,
                 <ul className="products">
                     {itemsList}
                 </ul>
@@ -248,42 +262,50 @@ class Base extends Component {
     }
 
     render() {
-        const searchText = this.state.searchText;
-
         const inputProps = {
-            value: searchText,
-            onChange: this.searchTextChange.bind(this),
+            value: this.state.searchText,
+            onChange: this.searchTextChange,
             placeholder: 'What are you looking for ...',
-            type: "search"
+            type: "search",
+            onKeyPress: (event) => {
+                if (event.key === "Enter") {
+                    this.searchTextSubmit();
+                }
+            }
         };
 
         return (
             <div className="base">
-                <Header logout={this.logout} goto={this.goto}
-                        savedNum={Object.keys(this.state.savedItems).length}/>
+                <Grid container spacing={0}>
+                    <Grid item xs={12}>
+                        <Header logout={this.logout} goto={this.goto}
+                                savedNum={this.state.savedItems.size}/>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <div id="search" className="search-bar">
+                            <Autosuggest
+                                suggestions={this.state.suggestions}
+                                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                                onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                                getSuggestionValue={this.getSuggestionValue}
+                                renderSuggestion={this.renderSuggestion}
+                                inputProps={inputProps}
+                                renderInputComponent={this.renderInputComponent}
+                            />
 
-                <div id="search" className="search-bar">
-                    {/*<input type="text" id="product_name" className="text" placeholder="Search for..."*/}
-                    {/*onChange={this.searchTextChange.bind(this)}/>*/}
-                    <Autosuggest
-                        suggestions={this.state.suggestions}
-                        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                        getSuggestionValue={this.getSuggestionValue}
-                        renderSuggestion={this.renderSuggestion}
-                        inputProps={inputProps}
-                        renderInputComponent={this.renderInputComponent}
-                    />
-
-                </div>
-
-                <div className="content">
-                    {this.renderContent()}
-                </div>
-
-                <div className="footer">
-                    <Footer goto={this.goto}/>
-                </div>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <div className="content">
+                            {this.renderContent()}
+                        </div>
+                    </Grid>
+                    {/*<Grid item xs={12}>*/}
+                    {/*<div className="footer">*/}
+                    {/*<Footer page={this.state.page} goto={this.goto}/>*/}
+                    {/*</div>*/}
+                    {/*</Grid>*/}
+                </Grid>
             </div>
 
         );

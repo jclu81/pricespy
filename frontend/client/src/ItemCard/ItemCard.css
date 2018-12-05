@@ -28,9 +28,12 @@
 
 .content-wrapper .content-dollar {
     color: #FF354E;
-    margin-bottom: 10px;
+    margin-bottom: 7px;
 }
-
+.content-wrapper .content-shipping {
+    color: #444;
+    margin-bottom: 0px;
+}
 .content-wrapper .content-detail {
     color: #fa8200;
     overflow: hidden;
@@ -41,7 +44,7 @@
 .content-wrapper .content-from {
     position: absolute;
     top: 80px;
-    width: 252px;
+    width: 322px;
     color: #9E9E9E;
 }
 
