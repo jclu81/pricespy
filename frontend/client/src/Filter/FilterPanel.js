@@ -79,7 +79,7 @@ class FilterPanel extends Component {
 
             }
             filterItems = filterItems.filter(function filter_(item) {
-                let words = item.TITLE.split(' ');
+                let words = item.title.split(' ');
 
                 for (let word of words) {
                     if (options.has(word.toLocaleLowerCase())) {

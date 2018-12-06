@@ -43,7 +43,7 @@
 
 .content-wrapper .content-from {
     position: absolute;
-    top: 80px;
+    top: 90px;
     width: 322px;
     color: #9E9E9E;
 }
@@ -86,7 +86,7 @@
 }
 
 .content-wrapper .content-ctn {
-    height: 57px;
+    height: 80px;
     overflow: hidden;
 }
 

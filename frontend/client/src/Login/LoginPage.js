@@ -21,6 +21,26 @@ class LoginPage extends React.Component {
         this.changeUser = this.changeUser.bind(this);
     };
 
+    loadSavedItems() {
+        let user_id = Auth.getEmail();
+        let request = new Request('https://pricespy-server.herokuapp.com/favorite?user_id=' + user_id, {
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+
+        fetch(request)
+            .then((response) => {
+                return response.json();
+            }).then((json) => {
+            for (let data of json) {
+                this.props.appendSavedItems(data)
+            }
+        });
+    }
+
     processForm(event) {
         //prevent default action, in this case, the action is the submission event
         event.preventDefault();
@@ -55,7 +75,8 @@ class LoginPage extends React.Component {
                         console.log(json);
                         Auth.authenticateUser(json.token, email);
                     });
-                    this.props.goto("home")
+                    this.loadSavedItems();
+                    this.props.goto("home");
                 } else {
                     console.log("Login Failed!");
                     response.json().then(function (json) {
@@ -91,6 +112,7 @@ class LoginPage extends React.Component {
 
 LoginPage.propTypes = {
     goto: PropTypes.func.isRequired,
+    appendSavedItems: PropTypes.func.isRequired,
 };
 
 export default LoginPage;

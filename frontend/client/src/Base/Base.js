@@ -54,7 +54,7 @@ class Base extends Component {
             suggestions: [],
             items: null,
             filteredItems: null,
-            savedItems: this.loadSavedItems(),
+            savedItems: new Map(persistentCart().get()),
             showFilter: false
         }
         ;
@@ -67,8 +67,12 @@ class Base extends Component {
         this.setState({filteredItems: data});
     };
 
-    loadSavedItems = () => {
-        return new Map(persistentCart().get());
+
+    appendSavedItems = (data) => {
+        let saveditems = this.state.savedItems;
+        for (let d of data) {
+            this.saveItem(d.product_id, d);
+        }
     };
 
     saveItem(key, item) {
@@ -76,6 +80,24 @@ class Base extends Component {
         savedItems.set(key, item);
         persistentCart().persist(savedItems);
         this.setState({savedItems: savedItems});
+
+        if (Auth.isAuthenticated()) {
+            let request = new Request('https://pricespy-server.herokuapp.com/favorite', {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: {
+                    user_id: Auth.getEmail(),
+                    product_id: key
+                }
+            });
+            fetch(request)
+                .then((response) => {
+                    return response.json();
+                });
+        }
     }
 
     getItem(key) {
@@ -88,6 +110,24 @@ class Base extends Component {
         savedItems.delete(key);
         persistentCart().persist(savedItems);
         this.setState({savedItems: savedItems});
+        if (Auth.isAuthenticated()) {
+            let request = new Request('https://pricespy-server.herokuapp.com/favorite', {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: {
+                    user_id: Auth.getEmail(),
+                    product_id: key
+                }
+            });
+
+            fetch(request)
+                .then((response) => {
+                    return response.json();
+                });
+        }
     }
 
     logout() {
@@ -199,7 +239,7 @@ class Base extends Component {
     renderContent() {
         switch (this.state.page) {
             case 'login':
-                return <LoginPage goto={this.goto}/>;
+                return <LoginPage goto={this.goto} appendSavedItems={this.appendSavedItems}/>;
             case 'signup':
                 return <SignUpPage goto={this.goto}/>;
             case 'favorite':

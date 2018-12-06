@@ -13,12 +13,22 @@ import FormLabel from '@material-ui/core/FormLabel';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 
+import {withStyles} from '@material-ui/core/styles';
 
 const sortOptions = [
     // "DEFAULT",
     "PRICE: LOW TO HIGH",
     "PRICE: HIGH TO LOW",
 ];
+
+const styles = {
+    label: {
+        lineHeight: 2.3,
+        margin: "auto",
+        display: "block",
+        textAlign: "right",
+    },
+};
 
 class SortBar extends Component {
     constructor(props) {
@@ -62,6 +72,7 @@ class SortBar extends Component {
 
 
     render() {
+        const {classes} = this.props;
         return (
             <Grid container spacing={0}>
                 <Grid item xs={8}>
@@ -83,7 +94,7 @@ class SortBar extends Component {
                     </FormControl>
                 </Grid>
                 <Grid item xs={4}>
-                    <FormLabel className="label">{this.props.items.length} Results</FormLabel>
+                    <FormLabel className={classes.label}>{this.props.items.length} Results</FormLabel>
                 </Grid>
                 <Grid item xs={12}>
                     <Divider/>
@@ -99,6 +110,6 @@ SortBar.propTypes = {
     updateFilterItems: PropTypes.func.isRequired
 };
 
-export default SortBar;
+export default withStyles(styles)(SortBar);
 
 
