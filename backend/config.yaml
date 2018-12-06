@@ -2,6 +2,16 @@ redis:
   host: localhost
   port: 6379
 
+elasticsearch:
+  host: localhost
+  port: 9200
+  favorite_index : favorite_index
+  favorite_doc_type: favorite
+  keyword_relation_index: keyword_relation_index
+  keyword_relation_doc_type: keyword_relation
+  product_index: product_index
+  product_doc_type: product
+
 cloudAMQP:
   dedupe_task_queue_url: amqp://dqrnfwcq:5JShMyJTo_IMnFVJHWIVYccfsjhsQvH7@otter.rmq.cloudamqp.com/dqrnfwcq
   dedupe_task_queue_name: price-spy-dedupe-task-queue
@@ -33,13 +43,16 @@ Amazon:
   detail_url : .//a[contains(@class,"s-access-detail-page")]/@href
   title : .//a[contains(@class,"s-access-detail-page")]/h2/text()
   price : .//span[@class="a-offscreen"]/text()
+  shipping: .//div[contains(@class,"a-span7")]/div[contains(@class,"a-spacing-mini")][1]//span[contains(@class,"a-color-secondary")]/text()
   image : .//div[contains(@class,"s-item-container")]//img/@src
-  detail_price: //*[@id="priceblock_ourprice"]
+  detail_price: //span[contains(@id,"ourprice") or contains(@id,"saleprice")]/text()
 
 eBay:
   search_url : https://www.ebay.com/sch/i.html?_nkw={0}&_sacat=0
   list : //li[contains(@class,"s-item")]
   detail_url : .//a[@class="s-item__link"]/@href
-  title : .//h3[contains(@class,"s-item__title")]/text()
+  title : .//h3[contains(@class,"s-item__title")]/text() | .//h3[contains(@class,"s-item__title")]/span/text()
   price : .//span[@class="s-item__price"]/text()
-  image : .//img[@class="s-item__image-img"]/@data-src
+  shipping: .//span[contains(@class,"s-item__shipping")]/span[contains(@class,"BOLD")]/text()
+  image : .//img[@class="s-item__image-img"]/@src | .//img[@class="s-item__image-img"]/@data-src
+  detail_price : //span[@id="prcIsum"]/text()
